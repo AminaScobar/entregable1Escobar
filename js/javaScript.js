@@ -1,13 +1,10 @@
 let ingles = "en";
 let espanol = "es";
+let nombreCliente;
 
-function cotizador() {
+function qIdiomaHablas () {
 
-let idioma = prompt("Bienvenido al cotizador automático del taller automotriz Gonzalez, si hablas español, digita ES. / Welcome to the Gonzalez auto shop automatic quote, if you speak English, type EN.").toLowerCase()
-
-let nombreCliente
-
-
+   let idioma = prompt("Bienvenido al cotizador automático del taller automotriz Gonzalez, si hablas español, digita ES. / Welcome to the Gonzalez auto shop automatic quote, if you speak English, type EN.").toLowerCase()
    if (idioma === ingles) {
       alert("At this time, we cannot offer you our automatic quote services, but you can write us your concerns to the following email: gtaller@gmail.com");
       return;
@@ -19,56 +16,31 @@ let nombreCliente
       alert("Idioma no reconocido");
       return;
 
-   }
-
-const cambioAceiteMotor = {
-    codigo: "cam",
-    precio: 40
+   };
 }
 
-const cambioAceitetransmit = {
-    codigo: "cat",
-    precio: 100
-}
+qIdiomaHablas ()
 
-const cambioFrenos = {
-    codigo: "cf",
-    precio: 50
-}
+let ofrecerProductoUno = "hola " + nombreCliente + " ingresa el código segun el servicio a cotizar: \nCambio de aceite motor, código: CAM.\nCambio de aceite transmisión, código: CAT.\nCambio de frenos, código: CF.\ncambio de bujias, código: CB.\nningun otro producto, código: NO.";
+let ofrecerProductoOtros = nombreCliente + " ¿quieres cotizar otro producto? ingresa el código segun el servicio a cotizar: \nCambio de aceite motor, código: CAM.\nCambio de aceite transmisión, código: CAT.\nCambio de frenos, código: CF.\ncambio de bujias, código: CB.\nningun otro producto, código: NO.";
+let preguntas = [ ofrecerProductoUno, ofrecerProductoOtros, ofrecerProductoOtros, ofrecerProductoOtros ];
 
-const cambioBujias = {
-    codigo: "cb",
-    precio: 60
-}
-
-const codigoProductos = [cambioAceiteMotor.codigo, cambioAceitetransmit.codigo, cambioFrenos.codigo, cambioBujias.codigo, "nop"]
-const preciosProductos = [cambioAceiteMotor.precio, cambioAceitetransmit.precio, cambioFrenos.precio, cambioBujias.precio, 0]
-
-let ofrecerProductoUno = nombreCliente + " ingresa el código segun el servicio a cotizar: Cambio de aceite motor(código: CAM), cambio de aceite transmisión(código: CAT), cambio de frenos(código: CF), cambio de bujias(código: CB) y ningun otro producto(código: NOP)."
-let ofrecerProductoOtros = nombreCliente + " ¿quieres cotizar otro producto? ingresa el código: Cambio de aceite motor(código: CAM), cambio de aceite transmisión(código: CAT), cambio de frenos(código: CF), cambio de bujias(código: CB) y ningun otro producto(código: NOP)."
-
+const codigoProductos = ["cam", "cat", "cf", "cf", "no"]
+const preciosProductos = [40, 100, 50, 60, 0]
 let precioProductoUno = 0;
 let precioProductoDos = 0;
 let precioProductoTres = 0;
 let precioProductoCuatro = 0;
 
-function obtenerProductos() {
-    let precios = [];
+let precios = [];
+let productosSeleccionados = [];
 
-    let preguntas = [
-        ofrecerProductoUno,
-        ofrecerProductoOtros,
-        ofrecerProductoOtros,
-        ofrecerProductoOtros
-    ];
-
-    let productosSeleccionados = [];
-
+function obtenerProductos() {   
     for (let i = 0; i < preguntas.length; i++) {
         let producto = prompt(preguntas[i]).toLowerCase();
         productosSeleccionados.push(producto);
 
-        if (producto === "nop" ) {
+        if (producto === "no" ) {
             break;
         }
 
@@ -91,16 +63,11 @@ function obtenerProductos() {
 
 }
 
+obtenerProductos()
 
 function sumaPreciosProductos() {
-    obtenerProductos()
-
     let total = precioProductoUno + precioProductoDos + precioProductoTres + precioProductoCuatro 
     let resultado = confirm(nombreCliente + ", el total de tu cotización es: $" + parseInt(total) )
 }
 
 sumaPreciosProductos()
-
-}
-
-cotizador()
